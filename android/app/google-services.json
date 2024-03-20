@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "630076586807",
+    "project_id": "testapp-17a71",
+    "storage_bucket": "testapp-17a71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630076586807:android:27d6fcb816de38dccaf8b2",
+        "android_client_info": {
+          "package_name": "com.soumyajitmukherjee.svpn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvLhKH_lvKyQ_grpCXsH7kRe62C2SlKqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

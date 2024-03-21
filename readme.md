@@ -31,7 +31,7 @@ The current version of the application is a pre-release and is intended to use a
 
 
 
-<img src="assets/images/readme.png" width="600">  
+<img src="assets/images/readme.png" width="700">  
 
 
 

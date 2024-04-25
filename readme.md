@@ -20,7 +20,6 @@
   </p>
 </div>
 
-
 ## ⚠ Note
 
 ### *The application is still under development and this is a pre-release version!*
@@ -29,11 +28,7 @@ The current version of the application is a pre-release and is intended to use a
 
 ## App Screenshots
 
-
-
 <img src="assets/images/readme.png" width="700">  
-
-
 
 ## Built With
 
@@ -65,5 +60,3 @@ Don't forget to give the project a star!
 ## 🚀 About Me
 
 Hi I am [Soumyajit Mukherjee](https://github.com/Sm69mu) & I'm a Flutter developer.
-
-

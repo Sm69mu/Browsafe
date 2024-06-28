@@ -23,7 +23,7 @@ class VpnCard extends StatelessWidget {
         onTap: () {
           controller.vpninfo.value = vpn;
           Pref.vpn = vpn;
-          Get.back();
+
           if (controller.vpnstate.value == VpnEngine.vpnConnected) {
             VpnEngine.stopVpn();
             Future.delayed(Duration(seconds: 2), () {
@@ -35,11 +35,13 @@ class VpnCard extends StatelessWidget {
         },
         child: ListTile(
           leading: Container(
-            height: 60,
-            width: 60,
-            decoration: BoxDecoration(
-                color: Colors.indigo, borderRadius: BorderRadius.circular(12)),
-            child: Icon(CupertinoIcons.globe),
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+            child: Image.asset(
+              "assets/flags/${vpn.countryshort.toLowerCase()}.png",
+              fit: BoxFit.contain,
+            ),
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
           subtitle: Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:meme_vpn/services/auth_services.dart';
 import 'package:meme_vpn/utils/responsive.dart';
 
@@ -26,32 +27,29 @@ class SignupScreen extends StatelessWidget {
           body: Column(
             children: [
               SizedBox(
-                height: ScreenUtils.screenHeight(context) / 10,
+                height: ScreenUtils.screenHeight(context) / 15,
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: Text('Before you start your dab dab dab first Login',
+                child: Text('Use secure connection to search anything 🌐',
                     style: new TextStyle(
                         fontSize: ScaleSize.textScaleFactor(context) * 30,
                         fontWeight: FontWeight.bold,
                         foreground: Paint()..shader = linearGradient1)),
               ),
-              Padding(
-                padding: const EdgeInsets.all(30),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                      "assets/images/memes/Screenshot 2024-03-15 125953.png"),
-                ),
+              SizedBox(
+                height: ScreenUtils.screenHeight(context) / 2,
+                child: Lottie.asset(
+                    "assets/animation/Animation - 1719567776988.json"),
               ),
               SizedBox(
-                height: ScreenUtils.screenHeight(context) / 10,
+                height: ScreenUtils.screenHeight(context) / 15,
               ),
               Center(
                 child: InkWell(
                   borderRadius: BorderRadius.circular(15),
                   onTap: () {
-                    Auth().signInwithGoogle();
+                    Auth.signInwithGoogle();
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),

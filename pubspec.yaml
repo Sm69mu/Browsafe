@@ -19,13 +19,14 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.7.0
   get: ^4.6.6
+  google_fonts: ^6.2.1
   google_sign_in: ^6.2.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   http: ^1.2.0
+  lottie: ^3.1.2
   url_launcher: ^6.2.5
   webview_flutter: ^4.8.0
-
 
 dev_dependencies:
   flutter_test:
@@ -42,4 +43,5 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/images/memes/
+    - assets/animation/
+    - assets/flags/

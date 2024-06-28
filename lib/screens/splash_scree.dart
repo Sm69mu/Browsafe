@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:meme_vpn/screens/browser_screens/browser_home_screen.dart';
 import '../utils/responsive.dart';
-import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
-      Get.off(()=>HomeScreen());
+      Get.off(()=>BrowserHomeScreen());
     });
   }
 
@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: ScreenUtils.screenWidth(context),
               top: ScreenUtils.screenHeight(context) * .4,
               child: Text(
-                'Meme Vpn',
+                'Browsafe',
                 textAlign: TextAlign.center,
                 style: new TextStyle(
                     fontSize: ScaleSize.textScaleFactor(context) * 30,
@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: ScreenUtils.screenWidth(context),
               bottom: ScreenUtils.screenHeight(context) * .2,
               child: Text(
-                'Enjoy Your Mutthi ✊',
+                'Browse with safety 🌐',
                 textAlign: TextAlign.center,
                 style: new TextStyle(
                     fontSize: ScaleSize.textScaleFactor(context) * 20,

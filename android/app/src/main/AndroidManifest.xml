@@ -10,7 +10,7 @@
     
     <application
         android:name="${applicationName}"
-        android:label="Meme Vpn"
+        android:label="Browsafe"
         android:icon="@mipmap/ic_launcher"
         tools:ignore="AllowBackup">
         

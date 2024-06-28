@@ -26,20 +26,9 @@ class NetworkDetailsScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-            actions: [
-              InkWell(
-                  borderRadius: BorderRadius.circular(20),
-                  onTap: () {
-                    Get.to(() => CreditsScreen());
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.info_outline),
-                  ))
-            ],
             backgroundColor: Colors.transparent,
             title: Text(
-              'IP Details',
+              'Network Details',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: ScaleSize.textScaleFactor(context) * 20,
@@ -128,18 +117,6 @@ class NetworkDetailsScreen extends StatelessWidget {
                       ))),
             ],
           ),
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () async {
-            await GoogleSignIn().signOut();
-            FirebaseAuth.instance.signOut();
-            Get.off(SignupScreen());
-          },
-          label: Text(
-            "Log Out",
-            style: TextStyle(fontWeight: FontWeight.w600),
-          ),
-          icon: Icon(Icons.logout_rounded),
         ),
       ),
     );

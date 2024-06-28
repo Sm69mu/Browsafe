@@ -37,7 +37,7 @@ android {
     defaultConfig {
         applicationId "com.soumyajitmukherjee.svpn"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

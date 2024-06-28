@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:meme_vpn/controllers/location_controller.dart';
-import 'package:meme_vpn/utils/responsive.dart';
 import 'package:meme_vpn/widgets/vpn_card.dart';
 
 class Vpnservers extends StatelessWidget {
@@ -23,17 +23,6 @@ class Vpnservers extends StatelessWidget {
                 colors: [Color.fromARGB(255, 90, 7, 104), Colors.black])),
         child: Scaffold(
           backgroundColor: const Color.fromARGB(0, 0, 0, 0),
-          appBar: AppBar(
-            centerTitle: true,
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            title: Text(
-              " Select Location (${controller.vpnslist.length}) Available ",
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: ScaleSize.textScaleFactor(context) * 20),
-            ),
-          ),
           body: controller.isloading.value
               ? Center(child: CircularProgressIndicator.adaptive())
               : controller.vpnslist.isEmpty
@@ -41,14 +30,18 @@ class Vpnservers extends StatelessWidget {
                       child: Text(
                       "No vpn 😪",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 27),
                     ))
                   : _vpnData(),
-          floatingActionButton: FloatingActionButton(
+          floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
               controller.getVpndata();
             },
-            child: Icon(Icons.refresh_rounded),
+            label: Text(
+              "Refresh",
+              style: GoogleFonts.urbanist(fontWeight: FontWeight.w600),
+            ),
+            icon: Icon(Icons.refresh_rounded),
           ),
         ),
       ),

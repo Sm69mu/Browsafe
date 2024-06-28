@@ -11,6 +11,7 @@ class HomeController extends GetxController {
   final Rx<Vpn> vpninfo = Pref.vpn.obs;
   final vpnstate = VpnEngine.vpnDisconnected.obs;
   final RxBool startTimer = false.obs;
+  final RxBool vpnswitcch = false.obs;
   void connectToVpn() {
     if (vpninfo.value.openVPNConfigDataBase64.isEmpty) {
       Mydialogs.info(message: "First Select a Location ");
@@ -30,8 +31,7 @@ class HomeController extends GetxController {
     } else {
       startTimer.value = false;
       VpnEngine.stopVpn();
-      Mydialogs.success(msg: "Sabas Marli muthhi");
+      Mydialogs.success(msg: "Vpn disconnected");
     }
   }
-
 }

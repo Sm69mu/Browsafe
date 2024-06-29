@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:meme_vpn/helpers/dialogs.dart';
-import 'package:meme_vpn/helpers/pref.dart';
-import 'package:meme_vpn/models/vpn.dart';
-import 'package:meme_vpn/models/vpn_config.dart';
-import 'package:meme_vpn/services/vpn_engine.dart';
+
+import '../helpers/dialogs.dart';
+import '../helpers/pref.dart';
+import '../models/vpn.dart';
+import '../models/vpn_config.dart';
+import '../services/vpn_engine.dart';
+
 
 class HomeController extends GetxController {
   final Rx<Vpn> vpninfo = Pref.vpn.obs;

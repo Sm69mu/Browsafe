@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:meme_vpn/screens/signup_screen.dart';
 import 'helpers/pref.dart';
+import 'screens/signup_screen.dart';
 import 'screens/splash_scree.dart';
 
 void main() async {
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Meme Vpn',
+        title: 'Browsafe',
         theme: ThemeData.dark(),
         home: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),

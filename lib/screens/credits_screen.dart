@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:meme_vpn/utils/responsive.dart';
-import 'package:meme_vpn/widgets/credits_link_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../utils/responsive.dart';
+import '../widgets/credits_link_widget.dart';
 
 class CreditsScreen extends StatefulWidget {
   @override

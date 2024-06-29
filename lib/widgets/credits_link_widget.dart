@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meme_vpn/utils/responsive.dart';
+
+import '../utils/responsive.dart';
 
 class CreditsLink extends StatelessWidget {
   final IconData icon;

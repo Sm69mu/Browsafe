@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:meme_vpn/services/auth_services.dart';
-import 'package:meme_vpn/utils/responsive.dart';
+
+import '../services/auth_services.dart';
+import '../utils/responsive.dart';
+
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});

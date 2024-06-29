@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:meme_vpn/screens/credits_screen.dart';
-import 'package:meme_vpn/screens/network_details_screen.dart';
-import 'package:meme_vpn/screens/signup_screen.dart';
+
+import '../screens/credits_screen.dart';
+import '../screens/network_details_screen.dart';
+import '../screens/signup_screen.dart';
+
 
 class MoreWidget extends StatelessWidget {
   const MoreWidget({super.key});

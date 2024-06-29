@@ -1,14 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:meme_vpn/apis/apis.dart';
-import 'package:meme_vpn/models/ipdetails.dart';
-import 'package:meme_vpn/models/network_data.dart';
-import 'package:meme_vpn/screens/credits_screen.dart';
-import 'package:meme_vpn/screens/signup_screen.dart';
-import 'package:meme_vpn/utils/responsive.dart';
-import 'package:meme_vpn/widgets/network_card.dart';
+
+import '../apis/apis.dart';
+import '../models/ipdetails.dart';
+import '../models/network_data.dart';
+import '../utils/responsive.dart';
+import '../widgets/network_card.dart';
+
 
 class NetworkDetailsScreen extends StatelessWidget {
   NetworkDetailsScreen({super.key});

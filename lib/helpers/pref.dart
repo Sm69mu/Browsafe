@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:hive_flutter/adapters.dart';
-import 'package:meme_vpn/models/vpn.dart';
+
+import '../models/vpn.dart';
+
 
 class Pref {
   static late Box _box;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meme_vpn/utils/responsive.dart';
-import 'package:meme_vpn/widgets/more_widget.dart';
 
 import '../../controllers/location_controller.dart';
+import '../../utils/responsive.dart';
+import '../../widgets/more_widget.dart';
 import '../home_screen.dart';
 import '../../controllers/home_controller.dart';
 import '../../services/vpn_engine.dart';

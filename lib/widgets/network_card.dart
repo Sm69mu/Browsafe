@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meme_vpn/models/network_data.dart';
+
+import '../models/network_data.dart';
 
 class Networkcard extends StatelessWidget {
   final Networkdata data;

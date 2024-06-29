@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meme_vpn/controllers/location_controller.dart';
-import 'package:meme_vpn/widgets/vpn_card.dart';
+
+import '../controllers/location_controller.dart';
+import '../widgets/vpn_card.dart';
+
 
 class Vpnservers extends StatelessWidget {
   Vpnservers({super.key});

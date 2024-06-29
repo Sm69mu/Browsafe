@@ -3,10 +3,12 @@ import 'dart:developer';
 import 'package:csv/csv.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
-import 'package:meme_vpn/helpers/dialogs.dart';
-import 'package:meme_vpn/helpers/pref.dart';
-import 'package:meme_vpn/models/ipdetails.dart';
-import 'package:meme_vpn/models/vpn.dart';
+
+import '../helpers/dialogs.dart';
+import '../helpers/pref.dart';
+import '../models/ipdetails.dart';
+import '../models/vpn.dart';
+
 
 class Apis {
   static Future<List<Vpn>> vpnApis() async {

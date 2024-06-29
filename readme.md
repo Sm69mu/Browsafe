@@ -11,7 +11,7 @@
     <br />
     <a ></a>
     ·
-    <a href="https://github.com/Sm69mu/meme_vpn/issues">Report Bug</a>
+    <a href="https://github.com/Sm69mu/Browsafe/issues">Report Bug</a>
     ·
     <a href="https://github.com/Sm69mu/meme_vpn/issues">Request Feature</a>
     .

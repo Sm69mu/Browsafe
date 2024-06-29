@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
-import 'package:meme_vpn/apis/apis.dart';
-import 'package:meme_vpn/helpers/pref.dart';
-import 'package:meme_vpn/models/vpn.dart';
+
+import '../apis/apis.dart';
+import '../helpers/pref.dart';
+import '../models/vpn.dart';
+
 
 class LocationController extends GetxController {
   List<Vpn> vpnslist = Pref.vpnList;

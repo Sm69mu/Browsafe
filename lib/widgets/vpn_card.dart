@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:meme_vpn/controllers/home_controller.dart';
-import 'package:meme_vpn/helpers/pref.dart';
-import 'package:meme_vpn/models/vpn.dart';
-import 'package:meme_vpn/services/vpn_engine.dart';
+
+import '../controllers/home_controller.dart';
+import '../helpers/pref.dart';
+import '../models/vpn.dart';
+import '../services/vpn_engine.dart';
+
 
 class VpnCard extends StatelessWidget {
   final Vpn vpn;

@@ -13,7 +13,7 @@
     ·
     <a href="https://github.com/Sm69mu/Browsafe/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Sm69mu/meme_vpn/issues">Request Feature</a>
+    <a href="https://github.com/Sm69mu/Browsafe/issues">Request Feature</a>
     .
     <br />
     <br />

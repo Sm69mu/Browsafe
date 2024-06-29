@@ -45,3 +45,4 @@ flutter:
     - assets/images/
     - assets/animation/
     - assets/flags/
+    - shorebird.yaml

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-
 import '../controllers/home_controller.dart';
 import '../services/vpn_engine.dart';
 import '../utils/responsive.dart';
@@ -35,8 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-              Color.fromARGB(255, 76, 10, 87),
-              Color.fromARGB(255, 92, 12, 121)
+              Color.fromARGB(255, 99, 14, 114),
+              Color.fromARGB(255, 27, 3, 36)
             ])),
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -49,9 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   leading: Container(
                     height: 50,
                     width: 50,
-                    decoration: BoxDecoration(
-                        
-                        borderRadius: BorderRadius.circular(12)),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(12)),
                     child: _controller.vpninfo.value.countryshort.isEmpty
                         ? Icon(CupertinoIcons.globe)
                         : Image.asset(
@@ -79,14 +77,24 @@ class _HomeScreenState extends State<HomeScreen> {
                         : _controller.vpninfo.value.countrylong.toString(),
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
-                  trailing: Switch(
-                      value: _controller.vpnswitcch.value,
-                      onChanged: (value) {
-                        _controller.connectToVpn();
-                        _controller.startTimer.value =
-                            !_controller.startTimer.value;
-                        _controller.vpnswitcch.value = value;
-                      }),
+                  trailing:
+                      _controller.vpnstate.value == VpnEngine.vpnConnecting
+                          ? CircularProgressIndicator()
+                          : Tooltip(
+                              message: "Connect To VPN",
+                              child: Switch(
+                                value: _controller.vpnswitcch.value,
+                                onChanged: (value) {
+                                  _controller.connectToVpn();
+                                  _controller.vpnstate.value ==
+                                          VpnEngine.vpnConnected
+                                      ? _controller.vpnswitcch.value =
+                                          !_controller.vpnswitcch.value
+                                      : _controller.vpnswitcch.value;
+                                  _controller.vpnswitcch.value = value;
+                                },
+                              ),
+                            ),
                 ),
               ),
               ClipRRect(

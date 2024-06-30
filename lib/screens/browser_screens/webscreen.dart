@@ -1,3 +1,4 @@
+import 'package:Browsafe/controllers/webview_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import "package:webview_flutter/webview_flutter.dart";
@@ -14,10 +15,20 @@ class WebScreen extends StatefulWidget {
 }
 
 class _WebScreenState extends State<WebScreen> {
+  final _controller = Get.put(WebvController());
   final TextEditingController SearchController = TextEditingController();
   late final WebViewController controller;
   late var weburl;
-  var loadingpercentage = 0;
+
+  Future<bool> exitApp(BuildContext context) async {
+    if (await controller.canGoBack()) {
+      print("onwill goback");
+      controller.goBack();
+      return Future.value(true);
+    } else {
+      return Future.value(false);
+    }
+  }
 
   @override
   void initState() {
@@ -27,41 +38,34 @@ class _WebScreenState extends State<WebScreen> {
     controller
       ..setNavigationDelegate(NavigationDelegate(
         onPageStarted: (url) {
-          setState(() {
-            loadingpercentage = 0;
-          });
+          _controller.loadingpercentage.value = 0;
         },
         onProgress: (progress) {
-          setState(() {
-            loadingpercentage = progress;
-          });
+          _controller.loadingpercentage.value = progress;
         },
         onPageFinished: (url) {
-          setState(() {
-            loadingpercentage = 100;
-          });
+          _controller.loadingpercentage.value = 100;
         },
       ))
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..addJavaScriptChannel("SnackBar", onMessageReceived: (message) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(message.message)));
-      });
+      ..setJavaScriptMode(JavaScriptMode.unrestricted);
   }
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      onPopInvoked: (didPop) {
-        controller.goBack();
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            //app background color
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Color.fromARGB(255, 76, 10, 87), Colors.black])),
+    return Container(
+      decoration: BoxDecoration(
+          //app background color
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color.fromARGB(255, 76, 10, 87), Colors.black])),
+      child: PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) async {
+          if (await controller.canGoBack()) {
+            controller.goBack();
+          } 
+        },
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -111,10 +115,11 @@ class _WebScreenState extends State<WebScreen> {
               WebViewWidget(
                 controller: controller,
               ),
-              if (loadingpercentage < 100)
-                LinearProgressIndicator(
-                  value: loadingpercentage / 100.0,
-                )
+              Obx(() => _controller.loadingpercentage.value < 100
+                  ? LinearProgressIndicator(
+                      value: _controller.loadingpercentage.value / 100.0,
+                    )
+                  : SizedBox.shrink())
             ],
           ),
         ),

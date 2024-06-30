@@ -57,18 +57,28 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
           centerTitle: true,
           elevation: 0,
           actions: [
-            IconButton(
+            Tooltip(
+              message: "VPN",
+              child: IconButton(
                 onPressed: () {
                   showModalBottomSheet(
-                      shape: BeveledRectangleBorder(),
-                      context: context,
-                      builder: (BuildContext context) {
-                        return ClipRRect(
-                            borderRadius: BorderRadius.circular(25),
-                            child: HomeScreen());
-                      });
+                    shape: BeveledRectangleBorder(),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: HomeScreen(),
+                      );
+                    },
+                  );
                 },
-                icon: Icon(Icons.vpn_key_outlined)),
+                icon: Icon(
+                  _controller.vpnstate.value == VpnEngine.vpnConnected
+                      ? Icons.vpn_key_off_outlined
+                      : Icons.vpn_key_outlined,
+                ),
+              ),
+            ),
             MoreWidget(),
           ],
         ),
@@ -110,34 +120,38 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
               height: 40,
             ),
             Center(
-              child: ElevatedButton(
-                  onPressed: () {
-                    searchOrQueary();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 20,
-                    minimumSize: Size(60, 60),
-                    backgroundColor: Colors.white.withOpacity(0.19),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              child: Tooltip(
+                message: "Search",
+                child: ElevatedButton(
+                    onPressed: () {
+                      searchOrQueary();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      elevation: 20,
+                      minimumSize: Size(60, 60),
+                      backgroundColor: Colors.white.withOpacity(0.19),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "Search",
-                        style: GoogleFonts.urbanist(
-                            fontWeight: FontWeight.w600,
-                            fontSize: ScaleSize.textScaleFactor(context) * 16),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Icon(Icons.search_outlined)
-                    ],
-                  )),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "Search",
+                          style: GoogleFonts.urbanist(
+                              fontWeight: FontWeight.w600,
+                              fontSize:
+                                  ScaleSize.textScaleFactor(context) * 16),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(Icons.search_outlined)
+                      ],
+                    )),
+              ),
             )
           ],
         ),

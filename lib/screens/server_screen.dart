@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/location_controller.dart';
 import '../widgets/vpn_card.dart';
 
-
 class Vpnservers extends StatelessWidget {
   Vpnservers({super.key});
 
@@ -18,13 +17,8 @@ class Vpnservers extends StatelessWidget {
 
     return Obx(
       () => Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Color.fromARGB(255, 90, 7, 104), Colors.black])),
         child: Scaffold(
-          backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+          backgroundColor: Colors.transparent,
           body: controller.isloading.value
               ? Center(child: CircularProgressIndicator.adaptive())
               : controller.vpnslist.isEmpty

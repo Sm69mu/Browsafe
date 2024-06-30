@@ -5,23 +5,23 @@ import '../models/vpn_status.dart';
 import '../models/vpn_config.dart';
 
 class VpnEngine {
-  ///Channel to native
+  //Channel to native
   static final String _eventChannelVpnStage = "vpnStage";
   static final String _eventChannelVpnStatus = "vpnStatus";
   static final String _methodChannelVpnControl = "vpnControl";
 
-  ///Snapshot of VPN Connection Stage
+  //Snapshot of VPN Connection Stage
   static Stream<String> vpnStageSnapshot() =>
       EventChannel(_eventChannelVpnStage).receiveBroadcastStream().cast();
 
-  ///Snapshot of VPN Connection Status
+  //Snapshot of VPN Connection Status
   static Stream<VpnStatus?> vpnStatusSnapshot() =>
       EventChannel(_eventChannelVpnStatus)
           .receiveBroadcastStream()
           .map((event) => VpnStatus.fromJson(jsonDecode(event)))
           .cast();
 
-  ///Start VPN easily
+  //Start VPN easily
   static Future<void> startVpn(VpnConfig vpnConfig) async {
     log(vpnConfig.config);
     return MethodChannel(_methodChannelVpnControl).invokeMethod(
@@ -35,27 +35,27 @@ class VpnEngine {
     );
   }
 
-  ///Stop vpn
+  //Stop vpn
   static Future<void> stopVpn() =>
       MethodChannel(_methodChannelVpnControl).invokeMethod("stop");
 
-  ///Open VPN Settings
+  //Open VPN Settings
   static Future<void> openKillSwitch() =>
       MethodChannel(_methodChannelVpnControl).invokeMethod("kill_switch");
 
-  ///Trigger native to get stage connection
+  //Trigger native to get stage connection
   static Future<void> refreshStage() =>
       MethodChannel(_methodChannelVpnControl).invokeMethod("refresh");
 
-  ///Get latest stage
+  //Get latest stage
   static Future<String?> stage() =>
       MethodChannel(_methodChannelVpnControl).invokeMethod("stage");
 
-  ///Check if vpn is connected
+  //Check if vpn is connected
   static Future<bool> isConnected() =>
       stage().then((value) => value?.toLowerCase() == "connected");
 
-  ///All Stages of connection
+  //All Stages of connection
   static const String vpnConnected = "connected";
   static const String vpnDisconnected = "disconnected";
   static const String vpnWaitConnection = "wait_connection";

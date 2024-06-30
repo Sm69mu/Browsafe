@@ -11,7 +11,6 @@ class Auth {
     );
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
-
     print(userCredential.user?.displayName);
     return userCredential.user;
   }

@@ -7,13 +7,15 @@ import '../screens/credits_screen.dart';
 import '../screens/network_details_screen.dart';
 import '../screens/signup_screen.dart';
 
-
 class MoreWidget extends StatelessWidget {
   const MoreWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
+      splashRadius: 12,
+      padding: EdgeInsets.all(6),
+      shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(12)),
       itemBuilder: (context) {
         return [
           PopupMenuItem(
@@ -44,22 +46,11 @@ class MoreWidget extends StatelessWidget {
               child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(Icons.feedback_outlined),
+              Icon(Icons.lock_outline),
               SizedBox(
                 width: 10,
               ),
-              Text("Feedback"),
-            ],
-          )),
-          PopupMenuItem(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Icon(Icons.report_gmailerrorred),
-              SizedBox(
-                width: 10,
-              ),
-              Text("Report"),
+              Text("Vault"),
             ],
           )),
           PopupMenuItem(

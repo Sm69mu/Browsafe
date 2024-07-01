@@ -53,5 +53,8 @@
                 <action android:name="android.net.VpnService" />
             </intent-filter>
         </service>
+        <meta-data 
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5378474904633653~4746010620"/>
     </application>
 </manifest>

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../controllers/location_controller.dart';
 import '../../utils/responsive.dart';
@@ -20,8 +21,28 @@ class BrowserHomeScreen extends StatefulWidget {
 class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
   final controller = LocationController();
   final _controller = Get.put(HomeController());
+  late BannerAd _bannerAd;
+  bool _isadloaded = false;
+  final String adUnitId = "ca-app-pub-5378474904633653/3392566351";
+
+  _initbannerAd() {
+    _bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: adUnitId,
+        listener: BannerAdListener(
+          onAdLoaded: (ad) {
+            setState(() {
+              _isadloaded = true;
+            });
+          },
+          onAdFailedToLoad: (ad, error) {},
+        ),
+        request: AdRequest());
+    _bannerAd.load();
+  }
 
   final TextEditingController SearchController = TextEditingController();
+
   void searchOrQueary() {
     String queary = SearchController.text.trim();
     Uri.tryParse(queary);
@@ -36,6 +57,12 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
             url: searchUrl,
           ));
     }
+  }
+
+  @override
+  void initState() {
+    _initbannerAd();
+    super.initState();
   }
 
   @override
@@ -155,6 +182,13 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
             )
           ],
         ),
+        bottomNavigationBar: _isadloaded
+            ? Container(
+                height: _bannerAd.size.height.toDouble(),
+                width: _bannerAd.size.width.toDouble(),
+                child: AdWidget(ad: _bannerAd),
+              )
+            : SizedBox(),
       ),
     );
   }

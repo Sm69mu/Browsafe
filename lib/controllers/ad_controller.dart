@@ -45,7 +45,7 @@ class AdController extends GetxController {
         ),
         request: AdRequest(),
         nativeTemplateStyle:
-            NativeTemplateStyle(templateType: TemplateType.medium));
+            NativeTemplateStyle(templateType: TemplateType.small));
     nativeAd!.load();
   }
 

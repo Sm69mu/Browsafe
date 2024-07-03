@@ -80,62 +80,70 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
                     },
                   );
                 },
-                icon: Icon(
-                  _controller.vpnstate.value == VpnEngine.vpnConnected
-                      ? Icons.vpn_key_off_outlined
-                      : Icons.vpn_key_outlined,
+                icon: Obx(
+                  () => Icon(
+                    _controller.vpnstate.value == VpnEngine.vpnConnected
+                        ? Icons.vpn_key_outlined
+                        : Icons.vpn_key_off_outlined,
+                  ),
                 ),
               ),
             ),
             MoreWidget(),
           ],
         ),
-        body: Column(
-          children: [
-            SizedBox(
-              height: ScreenUtils.screenHeight(context) / 10,
-            ),
-            Text(
-              "Browsafe",
-              style: GoogleFonts.urbanist(
-                  fontWeight: FontWeight.bold,
-                  fontSize: ScaleSize.textScaleFactor(context) * 35),
-            ),
-            SizedBox(
-              height: ScreenUtils.screenHeight(context) / 10,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: TextField(
-                  onSubmitted: (value) {
-                    String searchUrl = "https://www.google.com/search?q=$value";
-                    Get.to(() => WebScreen(
-                          url: searchUrl,
-                        ));
-                  },
-                  controller: SearchController,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.13),
-                    hintText: "Search anything in Privet ",
-                    hintStyle:
-                        GoogleFonts.urbanist(fontWeight: FontWeight.w600),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                  )),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Obx(() => Container(
-                child: _adcontroller.nativeAdIsLoaded.value
-                    ? ConstrainedBox(
-                        constraints:
-                            BoxConstraints(maxHeight: 350, minHeight: 200),
-                        child: AdWidget(ad: _adcontroller.nativeAd!),
-                      )
-                    : SizedBox()))
-          ],
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              SizedBox(
+                height: ScreenUtils.screenHeight(context) / 10,
+              ),
+              Text(
+                "Browsafe",
+                style: GoogleFonts.urbanist(
+                    fontWeight: FontWeight.bold,
+                    fontSize: ScaleSize.textScaleFactor(context) * 35),
+              ),
+              SizedBox(
+                height: ScreenUtils.screenHeight(context) / 10,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: TextField(
+                    onSubmitted: (value) {
+                      String searchUrl =
+                          "https://www.google.com/search?q=$value";
+                      Get.to(() => WebScreen(
+                            url: searchUrl,
+                          ));
+                    },
+                    controller: SearchController,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.13),
+                      hintText: "Search anything in Privet ",
+                      hintStyle:
+                          GoogleFonts.urbanist(fontWeight: FontWeight.w600),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                    )),
+              ),
+              SizedBox(
+                height: ScreenUtils.screenHeight(context) / 3,
+              ),
+              Obx(() => Container(
+                  child: _adcontroller.nativeAdIsLoaded.value
+                      ? ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxHeight: ScreenUtils.screenHeight(context) / 6,
+                            minHeight: ScreenUtils.screenHeight(context) / 10,
+                          ),
+                          child: AdWidget(ad: _adcontroller.nativeAd!),
+                        )
+                      : SizedBox()))
+            ],
+          ),
         ),
       ),
     );

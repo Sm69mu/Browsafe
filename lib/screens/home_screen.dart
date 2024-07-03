@@ -83,17 +83,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? CircularProgressIndicator()
                           : Tooltip(
                               message: "Connect To VPN",
-                              child: Switch(
-                                value: _controller.vpnswitcch.value,
-                                onChanged: (value) {
-                                  _controller.connectToVpn();
-                                  _controller.vpnstate.value ==
-                                          VpnEngine.vpnConnected
-                                      ? _controller.vpnswitcch.value =
-                                          !_controller.vpnswitcch.value
-                                      : _controller.vpnswitcch.value;
-                                  _controller.vpnswitcch.value = value;
-                                },
+                              child: Obx(
+                                () => Switch(
+                                  value: _controller.vpnswitcch.value,
+                                  onChanged: (value) {
+                                    _controller.connectToVpn();
+                                    _controller.vpnswitcch.value = value;
+                                  },
+                                ),
                               ),
                             ),
                 ),

@@ -19,9 +19,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _controller = Get.put(HomeController());
 
-
-
-
   @override
   Widget build(BuildContext context) {
     VpnEngine.vpnStageSnapshot().listen((event) {
@@ -80,7 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   trailing:
-                      _controller.vpnstate.value == VpnEngine.vpnConnecting
+                      _controller.vpnstate.value == VpnEngine.vpnConnecting ||
+                              _controller.vpnstate.value ==
+                                  VpnEngine.vpnAuthenticating
                           ? CircularProgressIndicator()
                           : Tooltip(
                               message: "Connect To VPN",

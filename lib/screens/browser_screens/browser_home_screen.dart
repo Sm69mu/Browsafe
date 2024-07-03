@@ -1,9 +1,9 @@
+import 'package:Browsafe/controllers/ad_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../../controllers/location_controller.dart';
 import '../../utils/responsive.dart';
 import '../../widgets/more_widget.dart';
 import '../home_screen.dart';
@@ -19,27 +19,8 @@ class BrowserHomeScreen extends StatefulWidget {
 }
 
 class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
-  final controller = LocationController();
   final _controller = Get.put(HomeController());
-  late BannerAd _bannerAd;
-  bool _isadloaded = false;
-  final String adUnitId = "ca-app-pub-5378474904633653/3392566351";
-
-  _initbannerAd() {
-    _bannerAd = BannerAd(
-        size: AdSize.banner,
-        adUnitId: adUnitId,
-        listener: BannerAdListener(
-          onAdLoaded: (ad) {
-            setState(() {
-              _isadloaded = true;
-            });
-          },
-          onAdFailedToLoad: (ad, error) {},
-        ),
-        request: AdRequest());
-    _bannerAd.load();
-  }
+  final _adcontroller = Get.put(AdController());
 
   final TextEditingController SearchController = TextEditingController();
 
@@ -61,8 +42,8 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
 
   @override
   void initState() {
-    _initbannerAd();
     super.initState();
+    _adcontroller.loadnativeAds();
   }
 
   @override
@@ -146,49 +127,16 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
             SizedBox(
               height: 40,
             ),
-            Center(
-              child: Tooltip(
-                message: "Search",
-                child: ElevatedButton(
-                    onPressed: () {
-                      searchOrQueary();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      elevation: 20,
-                      minimumSize: Size(60, 60),
-                      backgroundColor: Colors.white.withOpacity(0.19),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          "Search",
-                          style: GoogleFonts.urbanist(
-                              fontWeight: FontWeight.w600,
-                              fontSize:
-                                  ScaleSize.textScaleFactor(context) * 16),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Icon(Icons.search_outlined)
-                      ],
-                    )),
-              ),
-            )
+            Obx(() => Container(
+                child: _adcontroller.nativeAdIsLoaded.value
+                    ? ConstrainedBox(
+                        constraints:
+                            BoxConstraints(maxHeight: 350, minHeight: 200),
+                        child: AdWidget(ad: _adcontroller.nativeAd!),
+                      )
+                    : SizedBox()))
           ],
         ),
-        bottomNavigationBar: _isadloaded
-            ? Container(
-                height: _bannerAd.size.height.toDouble(),
-                width: _bannerAd.size.width.toDouble(),
-                child: AdWidget(ad: _bannerAd),
-              )
-            : SizedBox(),
       ),
     );
   }

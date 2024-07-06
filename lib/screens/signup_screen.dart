@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../services/auth_services.dart';
@@ -35,7 +36,7 @@ class SignupScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: Text('Use secure connection to search anything 💻',
-                      style: new TextStyle(
+                      style:  GoogleFonts.urbanist(
                           fontSize: ScaleSize.textScaleFactor(context) * 25,
                           fontWeight: FontWeight.bold,
                           foreground: Paint()..shader = linearGradient1)),
@@ -70,7 +71,7 @@ class SignupScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   "Login with Google",
-                                  style: TextStyle(
+                                  style: GoogleFonts.urbanist(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
                                       fontSize: 18),
@@ -108,7 +109,7 @@ class SignupScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   "Login as Guest",
-                                  style: TextStyle(
+                                  style: GoogleFonts.urbanist(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
                                       fontSize: 18),

@@ -6,10 +6,10 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../utils/responsive.dart';
 import '../../widgets/more_widget.dart';
-import '../home_screen.dart';
-import '../../controllers/home_controller.dart';
+import '../vpn_screen/vpn_screen.dart';
+import '../../controllers/vpn_controller.dart';
 import '../../services/vpn_engine.dart';
-import 'webscreen.dart';
+import 'web_screen.dart';
 
 class BrowserHomeScreen extends StatefulWidget {
   const BrowserHomeScreen({super.key});

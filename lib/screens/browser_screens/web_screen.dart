@@ -1,24 +1,29 @@
+import 'dart:async';
+
 import 'package:Browsafe/controllers/webview_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import "package:webview_flutter/webview_flutter.dart";
 
+import '../../controllers/vpn_controller.dart';
+import '../../services/vpn_engine.dart';
 import '../../widgets/more_widget.dart';
-import '../home_screen.dart';
+import '../vpn_screen/vpn_screen.dart';
 
 class WebScreen extends StatefulWidget {
   final String url;
   WebScreen({super.key, required this.url});
-
   @override
   State<WebScreen> createState() => _WebScreenState();
 }
 
 class _WebScreenState extends State<WebScreen> {
-  final _controller = Get.put(WebvController());
+  final _controller = Get.put(HomeController());
+  final _webvcontroller = Get.put(WebvController());
   final TextEditingController SearchController = TextEditingController();
   late final WebViewController controller;
   late var weburl;
+  final currentUrl = ValueNotifier<String>('');
 
   Future<bool> exitApp(BuildContext context) async {
     if (await controller.canGoBack()) {
@@ -38,13 +43,13 @@ class _WebScreenState extends State<WebScreen> {
     controller
       ..setNavigationDelegate(NavigationDelegate(
         onPageStarted: (url) {
-          _controller.loadingpercentage.value = 0;
+          _webvcontroller.loadingpercentage.value = 0;
         },
         onProgress: (progress) {
-          _controller.loadingpercentage.value = progress;
+          _webvcontroller.loadingpercentage.value = progress;
         },
         onPageFinished: (url) {
-          _controller.loadingpercentage.value = 100;
+          _webvcontroller.loadingpercentage.value = 100;
         },
       ))
       ..setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -64,7 +69,7 @@ class _WebScreenState extends State<WebScreen> {
         onPopInvoked: (didPop) async {
           if (await controller.canGoBack()) {
             controller.goBack();
-          } 
+          }
         },
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -73,17 +78,24 @@ class _WebScreenState extends State<WebScreen> {
               backgroundColor: Colors.transparent,
               actions: [
                 IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                          shape: BeveledRectangleBorder(),
-                          context: context,
-                          builder: (BuildContext context) {
-                            return ClipRRect(
-                                borderRadius: BorderRadius.circular(25),
-                                child: HomeScreen());
-                          });
-                    },
-                    icon: Icon(Icons.vpn_key_outlined)),
+                  onPressed: () {
+                    showModalBottomSheet(
+                        shape: BeveledRectangleBorder(),
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ClipRRect(
+                              borderRadius: BorderRadius.circular(25),
+                              child: HomeScreen());
+                        });
+                  },
+                  icon: Obx(
+                    () => Icon(
+                      _controller.vpnstate.value == VpnEngine.vpnConnected
+                          ? Icons.vpn_key_outlined
+                          : Icons.vpn_key_off_outlined,
+                    ),
+                  ),
+                ),
                 MoreWidget()
               ],
               leading: IconButton(
@@ -115,9 +127,9 @@ class _WebScreenState extends State<WebScreen> {
               WebViewWidget(
                 controller: controller,
               ),
-              Obx(() => _controller.loadingpercentage.value < 100
+              Obx(() => _webvcontroller.loadingpercentage.value < 100
                   ? LinearProgressIndicator(
-                      value: _controller.loadingpercentage.value / 100.0,
+                      value: _webvcontroller.loadingpercentage.value / 100.0,
                     )
                   : SizedBox.shrink())
             ],

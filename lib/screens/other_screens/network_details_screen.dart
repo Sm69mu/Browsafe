@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../apis/apis.dart';
-import '../models/ipdetails.dart';
-import '../models/network_data.dart';
-import '../utils/responsive.dart';
-import '../widgets/network_card.dart';
+import '../../apis/apis.dart';
+import '../../models/ipdetails.dart';
+import '../../models/network_data.dart';
+import '../../utils/responsive.dart';
+import '../../widgets/network_card.dart';
 
 class NetworkDetailsScreen extends StatefulWidget {
   NetworkDetailsScreen({super.key});

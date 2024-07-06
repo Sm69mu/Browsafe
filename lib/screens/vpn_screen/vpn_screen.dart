@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/home_controller.dart';
-import '../services/vpn_engine.dart';
-import '../utils/responsive.dart';
+import '../../controllers/vpn_controller.dart';
+import '../../services/vpn_engine.dart';
+import '../../utils/responsive.dart';
 import 'server_screen.dart';
 
 class HomeScreen extends StatefulWidget {

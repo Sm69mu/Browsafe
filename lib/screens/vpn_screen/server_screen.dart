@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../controllers/location_controller.dart';
-import '../widgets/vpn_card.dart';
+import '../../controllers/location_controller.dart';
+import '../../widgets/vpn_card.dart';
 
 class Vpnservers extends StatelessWidget {
   Vpnservers({super.key});
@@ -25,8 +25,8 @@ class Vpnservers extends StatelessWidget {
                   ? Center(
                       child: Text(
                       "No vpn 😪",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 27),
+                      style: GoogleFonts.urbanist(
+                          fontWeight: FontWeight.bold, fontSize: 27),
                     ))
                   : _vpnData(),
           floatingActionButton: FloatingActionButton.extended(

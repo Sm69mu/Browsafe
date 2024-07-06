@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../screens/credits_screen.dart';
-import '../screens/network_details_screen.dart';
+import '../screens/other_screens/credits_screen.dart';
+import '../screens/other_screens/network_details_screen.dart';
 import '../screens/signup_screen.dart';
 
 class MoreWidget extends StatelessWidget {

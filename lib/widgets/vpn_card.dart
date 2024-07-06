@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/home_controller.dart';
+import '../controllers/vpn_controller.dart';
 import '../helpers/pref.dart';
 import '../models/vpn.dart';
 import '../services/vpn_engine.dart';

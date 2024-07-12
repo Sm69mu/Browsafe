@@ -1,14 +1,10 @@
-import 'dart:async';
+import 'dart:developer';
 
 import 'package:Browsafe/controllers/webview_controller.dart';
+import 'package:Browsafe/widgets/more_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import "package:webview_flutter/webview_flutter.dart";
-
-import '../../controllers/vpn_controller.dart';
-import '../../services/vpn_engine.dart';
-import '../../widgets/more_widget.dart';
-import '../vpn_screen/vpn_screen.dart';
 
 class WebScreen extends StatefulWidget {
   final String url;
@@ -18,27 +14,20 @@ class WebScreen extends StatefulWidget {
 }
 
 class _WebScreenState extends State<WebScreen> {
-  final _controller = Get.put(HomeController());
   final _webvcontroller = Get.put(WebvController());
   final TextEditingController SearchController = TextEditingController();
   late final WebViewController controller;
   late var weburl;
-  final currentUrl = ValueNotifier<String>('');
-
-  Future<bool> exitApp(BuildContext context) async {
-    if (await controller.canGoBack()) {
-      print("onwill goback");
-      controller.goBack();
-      return Future.value(true);
-    } else {
-      return Future.value(false);
-    }
-  }
 
   @override
   void initState() {
     super.initState();
-    controller = WebViewController()..loadRequest(Uri.parse(widget.url));
+    controller = WebViewController()
+      ..loadRequest(Uri.parse(widget.url))
+      ..currentUrl().then((url) {
+        _webvcontroller.currentUrl.value = url.toString();
+        log(_webvcontroller.currentUrl.value);
+      });
 
     controller
       ..setNavigationDelegate(NavigationDelegate(
@@ -69,6 +58,7 @@ class _WebScreenState extends State<WebScreen> {
         onPopInvoked: (didPop) async {
           if (await controller.canGoBack()) {
             controller.goBack();
+            controller.clearCache();
           }
         },
         child: Scaffold(
@@ -78,25 +68,10 @@ class _WebScreenState extends State<WebScreen> {
               backgroundColor: Colors.transparent,
               actions: [
                 IconButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                        shape: BeveledRectangleBorder(),
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ClipRRect(
-                              borderRadius: BorderRadius.circular(25),
-                              child: HomeScreen());
-                        });
-                  },
-                  icon: Obx(
-                    () => Icon(
-                      _controller.vpnstate.value == VpnEngine.vpnConnected
-                          ? Icons.vpn_key_outlined
-                          : Icons.vpn_key_off_outlined,
-                    ),
-                  ),
-                ),
-                MoreWidget()
+                    onPressed: () {}, icon: Icon(Icons.numbers_outlined)),
+                Morewebwidget(
+                  controller: controller,
+                )
               ],
               leading: IconButton(
                   onPressed: () {
@@ -105,22 +80,26 @@ class _WebScreenState extends State<WebScreen> {
                   icon: Icon(Icons.home_outlined)),
               title: SizedBox(
                 height: 45,
-                child: TextField(
-                    controller: SearchController,
-                    onSubmitted: (value) {
-                      weburl = Uri.parse(value);
-                      if (weburl.scheme.isEmpty) {
-                        weburl =
-                            Uri.parse("https://www.google.com/search?q=$value");
-                      }
-                      controller.loadRequest(weburl);
-                      widget.url == weburl;
-                    },
-                    decoration: InputDecoration(
-                      hintText: widget.url,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                    )),
+                child: Obx(
+                  () => TextField(
+                      controller: SearchController,
+                      onSubmitted: (value) {
+                        weburl = Uri.parse(value);
+                        if (weburl.scheme.isEmpty) {
+                          weburl = Uri.parse(
+                              "https://www.google.com/search?q=$value");
+                        }
+                        controller.loadRequest(weburl);
+                        controller.currentUrl().then((url) {
+                          _webvcontroller.currentUrl.value = url.toString();
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: _webvcontroller.currentUrl.value,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      )),
+                ),
               )),
           body: Stack(
             children: [

@@ -6,11 +6,11 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AdController extends GetxController {
   NativeAd? nativeAd;
   RxBool nativeAdIsLoaded = false.obs;
-  final String nativeadUnit = "ca-app-pub-5378474904633653/6523262198";
+  static const String nativeadUnit = "ca-app-pub-5378474904633653/6523262198";
 
   BannerAd? bannerAd;
   RxBool bannerisLoaded = false.obs;
-  final String bannerAdunit = "ca-app-pub-5378474904633653/3392566351";
+  static const String bannerAdunit = "ca-app-pub-5378474904633653/3392566351";
 
   loaBannerAds() {
     bannerAd = BannerAd(

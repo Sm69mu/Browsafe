@@ -117,6 +117,7 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
                       Get.to(() => WebScreen(
                             url: searchUrl,
                           ));
+                      SearchController.clear();
                     },
                     controller: SearchController,
                     decoration: InputDecoration(

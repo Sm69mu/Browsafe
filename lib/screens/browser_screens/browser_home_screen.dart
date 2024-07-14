@@ -111,6 +111,7 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: TextField(
+                    keyboardType: TextInputType.url,
                     onSubmitted: (value) {
                       String searchUrl =
                           "https://www.google.com/search?q=$value";
@@ -121,6 +122,7 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
                     },
                     controller: SearchController,
                     decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search),
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.13),
                       hintText: "Search anything in Privet ",

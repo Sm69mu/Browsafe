@@ -39,6 +39,7 @@ class _WebScreenState extends State<WebScreen> {
         },
         onPageFinished: (url) {
           _webvcontroller.loadingpercentage.value = 100;
+          _webvcontroller.finishedloading(url);
         },
       ))
       ..setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -82,6 +83,7 @@ class _WebScreenState extends State<WebScreen> {
                 height: 45,
                 child: Obx(
                   () => TextField(
+                      keyboardType: TextInputType.url,
                       controller: SearchController,
                       onSubmitted: (value) {
                         weburl = Uri.parse(value);
@@ -90,9 +92,6 @@ class _WebScreenState extends State<WebScreen> {
                               "https://www.google.com/search?q=$value");
                         }
                         controller.loadRequest(weburl);
-                        controller.currentUrl().then((url) {
-                          _webvcontroller.currentUrl.value = url.toString();
-                        });
                       },
                       decoration: InputDecoration(
                         hintText: _webvcontroller.currentUrl.value,

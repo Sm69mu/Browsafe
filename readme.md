@@ -32,7 +32,7 @@ The current version of the application is a pre-release and is intended to use a
 
 - <a href="https://firebase.google.com/" > <img src="https://user-images.githubusercontent.com/70502672/191481355-c9c9c148-2d75-4948-85e1-c8a4708d4036.png" height="50"> </a>
 
-- <a href="https://www.vpngate.net/en/" > <img src="http://www.w3.org/2000/svg" height="50"> </a>
+- <a href="https://www.vpngate.net/en/" > <img src="https://community.openvpn.net/openvpn/raw-attachment/wiki/OpenvpnLogosAndIcons/openvpn_logo.png" height="50"> </a>
 
 - <a href="https://ip-api.com/" > <img src="https://ip-api.com/docs/static/logo.png" height="40"> </a>
 

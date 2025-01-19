@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
-import '../helpers/dialogs.dart';
-import '../helpers/pref.dart';
-import '../models/vpn.dart';
-import '../models/vpn_config.dart';
-import '../services/vpn_engine.dart';
+import '../app/constants/helpers/dialogs.dart';
+import '../app/constants/helpers/pref.dart';
+import '../app/data/models/vpn.dart';
+import '../app/data/models/vpn_config.dart';
+import '../app/data/services/vpn_engine/vpn_engine.dart';
 
 class HomeController extends GetxController {
   final Rx<Vpn> vpninfo = Pref.vpn.obs;

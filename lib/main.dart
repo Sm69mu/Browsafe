@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'helpers/pref.dart';
-import 'screens/signup_screen.dart';
-import 'screens/splash_scree.dart';
+import 'app/constants/helpers/pref.dart';
+import 'app/modules/signup_screen/views/signup_screen.dart';
+import 'app/modules/splash_screen/views/splash_scree.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

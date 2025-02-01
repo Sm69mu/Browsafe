@@ -1,9 +1,9 @@
-import 'package:Browsafe/controllers/ad_controller.dart';
+import 'package:Browsafe/utils/ad_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../../../data/services/vpn_apis/apis.dart';
+import '../../../data/services/vpn_apis/vpn_apis.dart';
 import '../../../data/models/ipdetails.dart';
 import '../../../data/models/network_data.dart';
 import '../../../../utils/responsive.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controllers/vpn_controller.dart';
+import '../../home_screen/controllers/home_controllers.dart';
 import '../../../data/services/vpn_engine/vpn_engine.dart';
 import '../../../../utils/responsive.dart';
 import 'server_screen.dart';

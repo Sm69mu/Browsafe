@@ -62,9 +62,9 @@ class _WebScreenState extends State<WebScreen> {
               actions: [
                 IconButton(
                     onPressed: () {}, icon: Icon(Icons.numbers_outlined)),
-                Morewebwidget(
-                  controller: inAppWebViewController!,
-                )
+                // Morewebwidget(
+                //   controller: inAppWebViewController!,
+                // )
               ],
               leading: IconButton(
                   onPressed: () {

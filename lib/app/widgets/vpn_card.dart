@@ -4,11 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/vpn_controller.dart';
-import '../constants/helpers/pref.dart';
+import '../modules/home_screen/controllers/home_controllers.dart';
+import '../data/services/local_storage/vpnlist_storage.dart';
 import '../data/models/vpn.dart';
 import '../data/services/vpn_engine/vpn_engine.dart';
-
 
 class VpnCard extends StatelessWidget {
   final Vpn vpn;
@@ -24,7 +23,7 @@ class VpnCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         onTap: () {
           controller.vpninfo.value = vpn;
-          Pref.vpn = vpn;
+          vpnProfilesStorage.vpn = vpn;
 
           if (controller.vpnstate.value == VpnEngine.vpnConnected) {
             VpnEngine.stopVpn();

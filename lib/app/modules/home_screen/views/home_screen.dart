@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:Browsafe/app/widgets/popup_menu.dart';
-import 'package:Browsafe/utils/ad_controller.dart';
+import 'package:Browsafe/app/constants/controllers/ad_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

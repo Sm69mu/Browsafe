@@ -1,4 +1,4 @@
-import 'package:Browsafe/utils/ad_controller.dart';
+import 'package:Browsafe/app/constants/controllers/ad_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';

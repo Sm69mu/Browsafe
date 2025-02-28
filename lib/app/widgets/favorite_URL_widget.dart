@@ -10,8 +10,8 @@ class FavoriteUrlWidget extends StatefulWidget {
   final dynamic icon;
   final dynamic onClick;
   final bool isLongPress;
-  final Function(int index)? onDelete; // Add callback
-  final Function(int index)? onEdit; // Add callback
+  final Function(int index)? onDelete; 
+  final Function(int index)? onEdit;
   final int index;
 
   const FavoriteUrlWidget({

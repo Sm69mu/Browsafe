@@ -2,10 +2,8 @@ import 'dart:convert';
 
 import 'package:Browsafe/app/data/models/news_model.dart';
 import 'package:Browsafe/app/widgets/text_field.dart';
-import 'package:Browsafe/utils/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 
 import '../../../constants/controllers/preferenec_controller.dart';
 import '../../../constants/helpers/snackbars.dart';
@@ -66,6 +64,10 @@ class HomeController extends GetxController {
       SnackBars.success(msg: "Vpn disconnected");
     }
   }
+
+  
+
+
 
   //------Favorite Sites--------------------
 
@@ -134,7 +136,7 @@ class HomeController extends GetxController {
 // complete the edit site function
 
   Future<void> editFavorite(int index, String newUrl, String newTitle) async {
-    final site = favoriteSites[index];
+    //final site = favoriteSites[index];
     final updatedSite = FavoriteSite(url: newUrl, title: newTitle);
     await FavoriteSitesStorage.editFavorite(index, updatedSite);
     favoriteSites[index] = updatedSite;
@@ -163,17 +165,6 @@ class HomeController extends GetxController {
 
   final RxBool isNewsEnabled = false.obs;
   final RxString newsToggleString = "".obs;
-  // toggleNews() {
-  //   globalVariables.isNewsEnabled = !globalVariables.isNewsEnabled;
-  //   isNewsEnabled.value = globalVariables.isNewsEnabled;
-  //   if (isNewsEnabled.value) {
-  //     newsToggleString.value = "Off";
-  //     GetNews();
-  //   } else {
-  //     newsToggleString.value = "On";
-  //     news.clear();
-  //   }
-  // }
 
   void toggleNews() async {
     isNewsEnabled.value = !isNewsEnabled.value;
@@ -195,12 +186,9 @@ class HomeController extends GetxController {
       final response = await _newsRepo.getEverything('technology', 1);
       if (response.statusCode == 200) {
         final rawJson = jsonDecode(response.body);
-        debugPrint(rawJson.toString());
         final results = NewsResponse.fromJson(rawJson);
 
-        // Change status check - News API returns "ok" string
         if (results.status == "ok") {
-          // Changed from boolean to string comparison
           news.clear();
           news.addAll(results.articles!
               .map((article) => {
@@ -217,7 +205,6 @@ class HomeController extends GetxController {
         SnackBars.error(err: 'Failed to load news');
       }
     } catch (e) {
-      debugPrint(e.toString());
       SnackBars.error(err: 'Error loading news: ${e.toString()}');
     }
   }

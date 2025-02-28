@@ -1,13 +1,10 @@
 import 'dart:developer';
 
-import 'package:Browsafe/app/widgets/popup_menu.dart';
 import 'package:Browsafe/app/constants/controllers/ad_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../utils/responsive.dart';
@@ -164,12 +161,8 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
                 child: TextField(
                     keyboardType: TextInputType.url,
                     onSubmitted: (value) {
-                      String searchUrl =
-                          "https://www.google.com/search?q=$value";
-                      log("https://www.google.com/search?q=$value");
-                      Get.to(() => WebScreen(
-                            url: searchUrl,
-                          ));
+                   
+                      searchOrQueary();
                       SearchController.clear();
                     },
                     controller: SearchController,

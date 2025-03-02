@@ -41,6 +41,13 @@ class _WebScreenState extends State<WebScreen> {
       ..setNavigationDelegate(NavigationDelegate(
         onPageStarted: (url) {
           searchController.text = url;
+          getController.loadingpercentage.value = 0;
+        },
+        onProgress: (progress) {
+          getController.loadingpercentage.value = progress;
+        },
+        onPageFinished: (url) {
+          getController.loadingpercentage.value = 100;
         },
       ))
       ..setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -75,8 +82,23 @@ class _WebScreenState extends State<WebScreen> {
               }).paddingOnly(bottom: 7),
             ),
             backgroundColor: Colors.transparent,
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(Icons.home_outlined))
+            ],
           ),
-          body: WebViewWidget(controller: webController),
+          body: Stack(children: [
+            WebViewWidget(controller: webController),
+            Obx(() => getController.loadingpercentage.value < 100
+                ? LinearProgressIndicator(
+                    minHeight: 4,
+                    value: getController.loadingpercentage.value / 100,
+                  )
+                : SizedBox.shrink())
+          ]),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: buildBottombar(

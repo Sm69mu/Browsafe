@@ -9,6 +9,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'app/data/bindings/global_bindings.dart';
 import 'app/data/services/local_storage/browser_tabs_storage.dart';
 import 'app/data/services/local_storage/favourite_sites_storage.dart';
+import 'app/data/services/local_storage/histroy_storage.dart';
 import 'app/data/services/local_storage/vpnlist_storage.dart';
 import 'app/modules/signup_screen/views/signup_screen.dart';
 import 'app/modules/splash_screen/views/splash_scree.dart';
@@ -20,6 +21,7 @@ void main() async {
   await vpnProfilesStorage.initializehive();
   await FavoriteSitesStorage.init();
   await TabStorage.init();
+  await HistoryStorage.init();
   MobileAds.instance.initialize();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setPreferredOrientations(
@@ -50,6 +52,7 @@ class _MyAppState extends State<MyApp> {
                 return const SplashScreen();
               } else {
                 return SplashScreen();
+                //change to signupscreen 
               }
             }
             return const Center(

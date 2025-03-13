@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:Browsafe/app/constants/controllers/ad_controller.dart';
 import 'package:Browsafe/app/modules/browser_tab_screen/controller/browser_tab_controller.dart';
+import 'package:Browsafe/app/modules/history_screen/views/history_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -151,6 +150,11 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
                     },
                   ),
                   CustomMenuItem(
+                    icon: Icons.history_rounded,
+                    title: "History",
+                    onTap: () => Get.to(() => HistoryScreen()),
+                  ),
+                  CustomMenuItem(
                     icon: Icons.lock_outline,
                     title: "Vault",
                     onTap: () {},
@@ -219,7 +223,7 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
 
               //Favourite panel with horizontal scroll
               Container(
-                  height: ScreenUtils.screenHeight(context) / 7,
+                  height: ScreenUtils.screenHeight(context) / 8,
                   width: ScreenUtils.screenWidth(context) - 30,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -301,7 +305,7 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
                         decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(20)),
-                        height: ScreenUtils.screenHeight(context) / 2.5,
+                        height: ScreenUtils.screenHeight(context) / 2.2,
                         width: ScreenUtils.screenWidth(context) - 30,
                         child: Obx(
                           () => _controller.isLoading.value
@@ -317,12 +321,16 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
                                       : _controller.news.length,
                                   itemBuilder: (context, index) {
                                     final newsItem = _controller.news[index];
-                                    return NewsWidget(
-                                      title: newsItem['title']!,
-                                      description: newsItem['description']!,
-                                      imageUrl: newsItem['urlToImage']!,
-                                      url: newsItem['url']!,
-                                    ).paddingSymmetric(vertical: 5);
+                                    return InkWell(
+                                      onTap: () => Get.to(
+                                          WebScreen(url: newsItem['url']!)),
+                                      child: NewsWidget(
+                                        title: newsItem['title']!,
+                                        description: newsItem['description']!,
+                                        imageUrl: newsItem['urlToImage']!,
+                                        url: newsItem['url']!,
+                                      ).paddingSymmetric(vertical: 5),
+                                    );
                                   }),
                         ),
                       )
@@ -345,18 +353,18 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
               ),
 
               //Ad container
-              Obx(() => Container(
-                  child: _adcontroller.nativeAdIsLoaded.value
-                      ? ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxHeight: ScreenUtils.screenHeight(context) / 6,
-                            minHeight: ScreenUtils.screenHeight(context) / 10,
-                          ),
-                          child: SizedBox()
+              // Obx(() => Container(
+              //     child: _adcontroller.nativeAdIsLoaded.value
+              //         ? ConstrainedBox(
+              //             constraints: BoxConstraints(
+              //               maxHeight: ScreenUtils.screenHeight(context) / 6,
+              //               minHeight: ScreenUtils.screenHeight(context) / 10,
+              //             ),
+              //             child: SizedBox()
 
-                          //AdWidget(ad: _adcontroller.nativeAd!),
-                          )
-                      : SizedBox()))
+              //             //AdWidget(ad: _adcontroller.nativeAd!),
+              //             )
+              //         : SizedBox()))
             ],
           ),
         ),

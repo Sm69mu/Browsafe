@@ -73,7 +73,7 @@ class _FavoriteUrlWidgetState extends State<FavoriteUrlWidget> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      width: ScreenUtils.screenWidth(context) / 5,
+      width: ScreenUtils.screenWidth(context) / 5.5,
       child: Column(
         children: [
           GestureDetector(
@@ -88,8 +88,8 @@ class _FavoriteUrlWidgetState extends State<FavoriteUrlWidget> {
                             fit: BoxFit.contain,
                           ).paddingAll(10)
                         : Icon(Icons.add, color: Colors.black, size: 30),
-                    height: ScreenUtils.screenHeight(context) * .07,
-                    width: ScreenUtils.screenHeight(context) * .07,
+                    height: ScreenUtils.screenHeight(context) * .055,
+                    width: ScreenUtils.screenHeight(context) * .055,
                     decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.95),
                         borderRadius: BorderRadius.circular(15)))
@@ -101,7 +101,7 @@ class _FavoriteUrlWidgetState extends State<FavoriteUrlWidget> {
             maxLines: 1,
             style: TextStyle(fontWeight: FontWeight.w600),
           ).paddingOnly(
-            top: ScreenUtils.screenHeight(context) / 60,
+            top: ScreenUtils.screenHeight(context) / 80,
           ),
         ],
       ),

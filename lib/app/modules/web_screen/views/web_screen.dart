@@ -10,6 +10,8 @@ import 'package:http/http.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../constants/assets/colors.dart';
+import '../../../data/models/history_model.dart';
+import '../../../data/services/local_storage/histroy_storage.dart';
 import '../../home_screen/views/home_screen.dart';
 
 class WebScreen extends StatefulWidget {
@@ -38,6 +40,7 @@ class _WebScreenState extends State<WebScreen> {
     }
   }
 
+  // In _WebScreenState class
   @override
   void initState() {
     super.initState();
@@ -52,8 +55,16 @@ class _WebScreenState extends State<WebScreen> {
         onProgress: (progress) {
           getController.loadingpercentage.value = progress;
         },
-        onPageFinished: (url) {
+        onPageFinished: (url) async {
           getController.loadingpercentage.value = 100;
+          // Add to history when page loads
+          final title = await webController.getTitle() ?? url;
+          final historyEntry = BrowserHistory(
+            url: url,
+            title: title,
+            visitTime: DateTime.now(),
+          );
+          await HistoryStorage.addToHistory(historyEntry);
         },
       ))
       ..setJavaScriptMode(JavaScriptMode.unrestricted);

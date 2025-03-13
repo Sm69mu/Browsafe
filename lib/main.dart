@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'app/data/bindings/global_bindings.dart';
+import 'app/data/services/local_storage/browser_tabs_storage.dart';
 import 'app/data/services/local_storage/favourite_sites_storage.dart';
 import 'app/data/services/local_storage/vpnlist_storage.dart';
 import 'app/modules/signup_screen/views/signup_screen.dart';
@@ -18,6 +19,7 @@ void main() async {
   await Firebase.initializeApp();
   await vpnProfilesStorage.initializehive();
   await FavoriteSitesStorage.init();
+  await TabStorage.init();
   MobileAds.instance.initialize();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setPreferredOrientations(
@@ -27,6 +29,7 @@ void main() async {
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -44,7 +47,7 @@ class _MyAppState extends State<MyApp> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.data == null) {
-                return const SignupScreen();
+                return const SplashScreen();
               } else {
                 return SplashScreen();
               }

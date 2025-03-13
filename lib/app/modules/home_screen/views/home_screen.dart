@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:Browsafe/app/constants/controllers/ad_controller.dart';
+import 'package:Browsafe/app/modules/browser_tab_screen/controller/browser_tab_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ import '../../../../utils/responsive.dart';
 import '../../../widgets/favorite_URL_widget.dart';
 import '../../../widgets/more_widget.dart';
 import '../../../widgets/news_widget.dart';
+import '../../browser_tab_screen/views/browser_tab_screen.dart';
 import '../../credits_screen/views/credits_screen.dart';
 import '../../network_details_screen/views/network_details_screen.dart';
 import '../../signup_screen/views/signup_screen.dart';
@@ -29,6 +31,7 @@ class BrowserHomeScreen extends StatefulWidget {
 class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
   final _controller = Get.put(HomeController());
   final _adcontroller = Get.put(AdController());
+  final _tabController = Get.put(BrowserTabController());
 
   final TextEditingController SearchController = TextEditingController();
 
@@ -40,11 +43,13 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
       Get.to(() => WebScreen(
             url: queary,
           ));
+      _tabController.addNewTab(queary);
     } else {
       String searchUrl = "https://www.google.com/search?q=$queary";
       Get.to(() => WebScreen(
             url: searchUrl,
           ));
+      _tabController.addNewTab(searchUrl);
     }
   }
 
@@ -69,34 +74,53 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           centerTitle: true,
           elevation: 0,
           actions: [
-            Tooltip(
-              message: "VPN",
-              child: IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    shape: BeveledRectangleBorder(),
-                    context: context,
-                    builder: (BuildContext context) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(25),
-                        child: HomeScreen(),
-                      );
-                    },
-                  );
-                },
-                icon: Obx(
-                  () => Icon(
-                    _controller.vpnstate.value == VpnEngine.vpnConnected
-                        ? Icons.vpn_key_outlined
-                        : Icons.vpn_key_off_outlined,
+            IconButton(
+              onPressed: () {
+                Get.to(() => BrowserTabviewScreen());
+              },
+              icon: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.white.withOpacity(0.7),
+                    width: 2,
+                    style: BorderStyle.solid,
                   ),
+                  borderRadius: BorderRadius.circular(7),
                 ),
+                child: Text(_tabController.tabs.length.toString())
+                    .paddingSymmetric(vertical: 2, horizontal: 7),
               ),
+              iconSize: 25,
             ),
+            // Tooltip(
+            //   message: "VPN",
+            //   child: IconButton(
+            //     onPressed: () {
+            //       showModalBottomSheet(
+            //         shape: BeveledRectangleBorder(),
+            //         context: context,
+            //         builder: (BuildContext context) {
+            //           return ClipRRect(
+            //             borderRadius: BorderRadius.circular(25),
+            //             child: HomeScreen(),
+            //           );
+            //         },
+            //       );
+            //     },
+            //     icon: Obx(
+            //       () => Icon(
+            //         _controller.vpnstate.value == VpnEngine.vpnConnected
+            //             ? Icons.vpn_key_outlined
+            //             : Icons.vpn_key_off_outlined,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Container(
               margin: EdgeInsets.only(right: 10),
               decoration: BoxDecoration(
@@ -109,6 +133,22 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
                     icon: Icons.network_check,
                     title: "Network Details",
                     onTap: () => Get.to(() => NetworkDetailsScreen()),
+                  ),
+                  CustomMenuItem(
+                    icon: Icons.key_rounded,
+                    title: "VPN",
+                    onTap: () {
+                      showModalBottomSheet(
+                        shape: BeveledRectangleBorder(),
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: HomeScreen(),
+                          );
+                        },
+                      );
+                    },
                   ),
                   CustomMenuItem(
                     icon: Icons.lock_outline,
@@ -161,7 +201,6 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
                 child: TextField(
                     keyboardType: TextInputType.url,
                     onSubmitted: (value) {
-                   
                       searchOrQueary();
                       SearchController.clear();
                     },

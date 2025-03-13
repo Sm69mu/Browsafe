@@ -1,11 +1,16 @@
 import 'dart:developer';
 
+import 'package:Browsafe/app/modules/browser_tab_screen/controller/browser_tab_controller.dart';
+import 'package:Browsafe/app/modules/browser_tab_screen/views/browser_tab_screen.dart';
+import 'package:Browsafe/app/modules/vpn_screen/views/vpn_screen.dart';
 import 'package:Browsafe/app/modules/web_screen/controllers/webview_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../constants/assets/colors.dart';
+import '../../home_screen/views/home_screen.dart';
 
 class WebScreen extends StatefulWidget {
   String url;
@@ -19,6 +24,7 @@ class _WebScreenState extends State<WebScreen> {
   late WebViewController webController;
   late TextEditingController searchController;
   final getController = Get.put(WebScreenController());
+  final tabController = Get.put(BrowserTabController());
 
   void searchOrQueary() {
     String queary = searchController.text.trim();
@@ -85,7 +91,7 @@ class _WebScreenState extends State<WebScreen> {
             actions: [
               IconButton(
                   onPressed: () {
-                    Get.back();
+                    Get.to(() => BrowserHomeScreen());
                   },
                   icon: Icon(Icons.home_outlined))
             ],
@@ -102,6 +108,7 @@ class _WebScreenState extends State<WebScreen> {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: buildBottombar(
+            tabCount: tabController.tabs.value.length,
             onBackTap: () async {
               if (await webController.canGoBack()) {
                 webController.goBack();
@@ -114,9 +121,11 @@ class _WebScreenState extends State<WebScreen> {
             },
             onNewTabTap: () {
               // Handle new tab
+              Get.to(() => BrowserHomeScreen());
             },
             onAllTabsTap: () {
               // Handle all tabs
+              Get.to(() => BrowserTabviewScreen());
             },
             onMoreTap: () {
               // Handle more options
@@ -134,6 +143,7 @@ Widget buildBottombar({
   required VoidCallback? onNewTabTap,
   required VoidCallback? onAllTabsTap,
   required VoidCallback? onMoreTap,
+  required final int tabCount,
 }) {
   return Container(
     height: 70,
@@ -174,7 +184,8 @@ Widget buildBottombar({
               ),
               borderRadius: BorderRadius.circular(7),
             ),
-            child: Text("1").paddingSymmetric(vertical: 2, horizontal: 7),
+            child: Text(tabCount.toString())
+                .paddingSymmetric(vertical: 2, horizontal: 7),
           ),
           iconSize: 25,
         ),

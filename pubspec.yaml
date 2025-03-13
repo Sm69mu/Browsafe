@@ -32,6 +32,7 @@ dependencies:
   lottie: ^3.1.2
   metadata_fetch: ^0.4.2
   url_launcher: ^6.2.5
+  uuid: ^4.5.1
   webview_flutter: ^4.8.0
 
 dev_dependencies:

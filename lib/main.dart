@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'app/data/bindings/global_bindings.dart';
+import 'app/data/services/local_storage/bookmarks_storage.dart';
 import 'app/data/services/local_storage/browser_tabs_storage.dart';
 import 'app/data/services/local_storage/favourite_sites_storage.dart';
 import 'app/data/services/local_storage/histroy_storage.dart';
@@ -22,6 +23,8 @@ void main() async {
   await FavoriteSitesStorage.init();
   await TabStorage.init();
   await HistoryStorage.init();
+  await BookmarkStorage.init();
+
   MobileAds.instance.initialize();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setPreferredOrientations(
@@ -52,7 +55,7 @@ class _MyAppState extends State<MyApp> {
                 return const SplashScreen();
               } else {
                 return SplashScreen();
-                //change to signupscreen 
+                //change to signupscreen
               }
             }
             return const Center(

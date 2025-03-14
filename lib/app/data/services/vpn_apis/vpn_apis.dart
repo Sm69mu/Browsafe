@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 
 import '../../../constants/helpers/snackbars.dart';
 import '../local_storage/vpnlist_storage.dart';
-import '../../models/ipdetails.dart';
+import '../../models/networks_models/ipdetails.dart';
 import '../../models/vpn.dart';
 
 class Apis {

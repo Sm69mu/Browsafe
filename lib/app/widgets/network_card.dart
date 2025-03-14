@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../data/models/network_data.dart';
+import '../data/models/networks_models/network_data.dart';
 
 class Networkcard extends StatelessWidget {
   final Networkdata data;

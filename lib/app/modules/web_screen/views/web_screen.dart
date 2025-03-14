@@ -10,7 +10,9 @@ import 'package:http/http.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../constants/assets/colors.dart';
-import '../../../data/models/history_model.dart';
+import '../../../data/models/bookmarks_models/bookmark_models.dart';
+import '../../../data/models/web_history/history_model.dart';
+import '../../../data/services/local_storage/bookmarks_storage.dart';
 import '../../../data/services/local_storage/histroy_storage.dart';
 import '../../home_screen/views/home_screen.dart';
 
@@ -100,6 +102,21 @@ class _WebScreenState extends State<WebScreen> {
             ),
             backgroundColor: Colors.transparent,
             actions: [
+              // In WebScreen class
+              IconButton(
+                icon: Icon(Icons.bookmark_add),
+                onPressed: () async {
+                  //final title = await webController.getTitle() ?? 'Bookmark';
+                  final currentUrl = await webController.currentUrl() ?? '';
+
+                  final bookmark = Bookmark(
+                    url: currentUrl,
+                  );
+
+                  await BookmarkStorage.addBookmark(bookmark);
+                  Get.snackbar('Success', 'Bookmark added');
+                },
+              ),
               IconButton(
                   onPressed: () {
                     Get.to(() => BrowserHomeScreen());

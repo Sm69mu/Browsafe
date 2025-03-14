@@ -1,4 +1,5 @@
 import 'package:Browsafe/app/constants/controllers/ad_controller.dart';
+import 'package:Browsafe/app/modules/bookmarks_screen/views/bookmarks_screen.dart';
 import 'package:Browsafe/app/modules/browser_tab_screen/controller/browser_tab_controller.dart';
 import 'package:Browsafe/app/modules/history_screen/views/history_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -155,9 +156,11 @@ class _BrowserHomeScreenState extends State<BrowserHomeScreen> {
                     onTap: () => Get.to(() => HistoryScreen()),
                   ),
                   CustomMenuItem(
-                    icon: Icons.lock_outline,
-                    title: "Vault",
-                    onTap: () {},
+                    icon: Icons.star_border,
+                    title: "Bookmarks",
+                    onTap: () {
+                      Get.to(() => BookmarksScreen());
+                    },
                   ),
                   CustomMenuItem(
                     icon: Icons.info_outline,

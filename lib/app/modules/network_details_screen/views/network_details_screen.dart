@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../../data/services/vpn_apis/vpn_apis.dart';
-import '../../../data/models/ipdetails.dart';
-import '../../../data/models/network_data.dart';
+import '../../../data/models/networks_models/ipdetails.dart';
+import '../../../data/models/networks_models/network_data.dart';
 import '../../../../utils/responsive.dart';
 import '../../../widgets/network_card.dart';
 

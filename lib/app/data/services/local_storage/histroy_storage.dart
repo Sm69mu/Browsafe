@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import '../../models/history_model.dart';
+import '../../models/web_history/history_model.dart';
 
 class HistoryStorage {
   static const String _boxName = 'browser_history';

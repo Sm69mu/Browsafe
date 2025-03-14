@@ -31,7 +31,7 @@ class FavoriteUrlWidget extends StatefulWidget {
 }
 
 class _FavoriteUrlWidgetState extends State<FavoriteUrlWidget> {
-  void _showPopupMenu(TapDownDetails details) {
+  void _showPopupMenu(LongPressStartDetails details) {
     showMenu(
       context: context,
       position: RelativeRect.fromLTRB(
@@ -41,18 +41,18 @@ class _FavoriteUrlWidgetState extends State<FavoriteUrlWidget> {
         details.globalPosition.dy + 1,
       ),
       items: [
-        PopupMenuItem(
-          child: ListTile(
-            leading: Icon(Icons.edit, color: Colors.grey),
-            title: Text('Edit'),
-            contentPadding: EdgeInsets.zero,
-          ),
-          onTap: () {
-            if (widget.onEdit != null) {
-              widget.onEdit!(widget.index);
-            }
-          },
-        ),
+        // PopupMenuItem(
+        //   child: ListTile(
+        //     leading: Icon(Icons.edit, color: Colors.grey),
+        //     title: Text('Edit'),
+        //     contentPadding: EdgeInsets.zero,
+        //   ),
+        //   onTap: () {
+        //     if (widget.onEdit != null) {
+        //       widget.onEdit!(widget.index);
+        //     }
+        //   },
+        // ),
         PopupMenuItem(
           child: ListTile(
             leading: Icon(Icons.delete, color: Colors.grey),
@@ -77,9 +77,11 @@ class _FavoriteUrlWidgetState extends State<FavoriteUrlWidget> {
       child: Column(
         children: [
           GestureDetector(
-            onTapDown: widget.isLongPress
-                ? (details) => _showPopupMenu(details)
-                : null,
+            onLongPressStart: (details) {
+              if (widget.isLongPress) {
+                _showPopupMenu(details);
+              }
+            },
             onTap: widget.onClick,
             child: Container(
                     child: widget.url.isNotEmpty
@@ -96,7 +98,7 @@ class _FavoriteUrlWidgetState extends State<FavoriteUrlWidget> {
                 .paddingOnly(top: ScreenUtils.screenHeight(context) / 60),
           ),
           Text(
-            widget.title != null ? widget.title : widget.url,
+            widget.title.isNotEmpty ? widget.title : widget.url,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: TextStyle(fontWeight: FontWeight.w600),

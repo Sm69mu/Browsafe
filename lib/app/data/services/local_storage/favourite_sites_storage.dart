@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import '../../models/favourite_sites.dart';
+import '../../models/favourite_website/favourite_sites.dart';
 
 class FavoriteSitesStorage {
   static const String _boxName = 'favorite_sites';

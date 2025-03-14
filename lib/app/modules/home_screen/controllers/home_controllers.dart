@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import '../../../constants/controllers/preferenec_controller.dart';
 import '../../../constants/helpers/snackbars.dart';
-import '../../../data/models/favourite_sites.dart';
+import '../../../data/models/favourite_website/favourite_sites.dart';
 import '../../../data/services/local_storage/favourite_sites_storage.dart';
 import '../../../data/services/local_storage/vpnlist_storage.dart';
 import '../../../data/models/vpn.dart';
